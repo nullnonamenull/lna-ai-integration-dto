@@ -1,4 +1,4 @@
-name: Install and Auto-release DTO-lib
+name: Auto-install & Deploy DTO-lib
 
 on:
   push:
@@ -9,14 +9,12 @@ permissions:
   packages: write
 
 jobs:
-  test-install-release:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -30,22 +28,6 @@ jobs:
 
       - name: Build and install
         run: mvn clean install -B
-
-      - name: Get version from pom.xml
-        id: get_version
-        run: |
-          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-
-      - name: Configure Git for tagging
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-
-      - name: Tag current version
-        run: |
-          git tag -a "v${{ env.VERSION }}" -m "Release v${{ env.VERSION }}"
-          git push origin "v${{ env.VERSION }}"
 
       - name: Deploy to GitHub Packages
         run: mvn deploy -B -DskipTests
