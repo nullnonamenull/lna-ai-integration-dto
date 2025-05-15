@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.noname</groupId>
     <artifactId>lna-ai-integration-dto</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <name>lna-ai-integration-dto</name>
     <description>lna-ai-integration-dto</description>
 

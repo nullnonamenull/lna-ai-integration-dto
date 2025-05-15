@@ -2,7 +2,7 @@ name: Auto-install & Deploy DTO-lib
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
 permissions:
   contents: write
