@@ -28,8 +28,10 @@ jobs:
 
       - name: Build and install
         run: mvn clean install -B
+        working-directory: ./lna-ai-integration-dto
 
       - name: Deploy to GitHub Packages
         run: mvn deploy -B -DskipTests
+        working-directory: ./lna-ai-integration-dto
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
